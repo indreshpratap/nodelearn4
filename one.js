@@ -20,6 +20,6 @@ module.exports = {
  msg: message
 }
 
-console.log(module.exports.hello());
+console.log(module.exports);
 
 //console.log("One.js ",hello());
