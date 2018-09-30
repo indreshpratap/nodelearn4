@@ -1,0 +1,23 @@
+{
+  "name": "nodeapp4",
+  "version": "0.0.1",
+  "description": "this is node app v4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indreshpratap/nodelearn4.git"
+  },
+  "author": "Indresh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/indreshpratap/nodelearn4/issues"
+  },
+  "homepage": "https://github.com/indreshpratap/nodelearn4#readme",
+  "dependencies": {
+    "colors": "^1.3.2",
+    "lodash": "^4.17.11"
+  }
+}
