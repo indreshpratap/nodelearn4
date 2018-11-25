@@ -1,10 +1,11 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
+
 // create instance of express app
 let app = express();
 
-nunjucks.configure('views', {
+nunjucks.configure(path.resolve(__dirname,'views'), {
     autoescape: true,
     express: app,
     noCache: true
@@ -13,9 +14,13 @@ nunjucks.configure('views', {
 //allow static resources to be served by express it self.
 app.use(express.static(path.resolve(__dirname,'public')));
 
+
+// Routing
 app.get('/', (request, response) => {
-    let data = {title:'Express App',author:'Indresh'};
-    response.render('index.html',data);
+
+    let que = request.query;
+    
+    response.render('index.html', {title:'Express App',author: que.author?que.author:'Indresh', user:{name:'Tst'}});
 });
 
 app.get('/home', (req, res) => {
@@ -39,13 +44,14 @@ app.get('/say-hello', (req, res) => {
 app.get("/product", (req, res) => {
     res.send("Product listing ");
 });
+
 //Path Variables or Params
 app.get("/product/:id", (req, res) => {
     let id = req.params.id;
     res.send("Product details for id: " + id);
 });
 
-app.get("/product/:id/review/:rid", (req, res) => {
+app.post("/product/:id/review/:rid", (req, res) => {
     let id = req.params.id;
     let rid = req.params.rid;
     res.send(`Product review for rid: ${rid} and id is ${id}`);
