@@ -1,7 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-
+const bindApiRoutes = require('./modules/api.routes');
 // create instance of express app
 let app = express();
 
@@ -56,6 +56,9 @@ app.post("/product/:id/review/:rid", (req, res) => {
     let rid = req.params.rid;
     res.send(`Product review for rid: ${rid} and id is ${id}`);
 });
+
+
+bindApiRoutes(app);
 
 
 // Not found or global
