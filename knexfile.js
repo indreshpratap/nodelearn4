@@ -4,6 +4,7 @@ module.exports = {
 
   development: {
     client: 'sqlite3',
+    debug:true,
     connection: {
       filename: path.resolve(__dirname,'./dao/dev.sqlite')
     }

@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     return Promise.all(
         [
             knex.schema.createTable('users', function (t) {
-                t.increments();
+                t.increments('id');
                 t.string('name');
                 t.string('address');
                 t.integer('age');
