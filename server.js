@@ -6,12 +6,16 @@ const bindApiRoutes = require('./modules/api.routes');
 // create instance of express app
 let app = express();
 
-app.use(bodyParser.json());
+
 nunjucks.configure(path.resolve(__dirname,'views'), {
     autoescape: true,
     express: app,
     noCache: true
 });
+
+
+//parse json payload and set in req.body
+app.use(bodyParser.json());
 
 //allow static resources to be served by express it self.
 app.use(express.static(path.resolve(__dirname,'public')));
@@ -31,7 +35,12 @@ app.get("**", (req, res) => {
     res.status(404).send(`Requested page: ${req.url} not found`);
 })
 
+// error handler
+app.use(function(err,req,res,next){
+    console.log('Final',err);
+    res.json({failed:true});
 
+})
 
 // listen to specific port
 app.listen(3000, () => {
