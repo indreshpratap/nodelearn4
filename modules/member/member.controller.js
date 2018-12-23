@@ -10,5 +10,5 @@ exports.saveUser = function (req, res) {
 }
 
 exports.fetchUser = function (req, res) {
-   db('users').select().then(data=>res.json(data));
+   db('users').select().then(data=>res.json({data,views:req.session.views}));
 }

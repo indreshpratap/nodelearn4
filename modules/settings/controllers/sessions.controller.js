@@ -3,5 +3,10 @@ exports.saveSession= (req,res)=>{
 }
 
 exports.getSessions = (req,res)=>{
-    res.json({status:true});
+    if(req.session.views){
+        ++req.session.views;
+    }else {
+        req.session.views=1;
+    }
+    res.json({status:true,views:req.session.views});
 }

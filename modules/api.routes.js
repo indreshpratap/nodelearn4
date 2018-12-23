@@ -6,10 +6,19 @@ var memberRoutes = require('./member/member.routes');
 var adminRoutes = require('./admin/admin.routes');
 var settingRoutes = require('./settings/settings.routes');
 
+
+function isAuth(req,res,next){
+    if(req.isAuthenticated()){
+        next();
+    }else {
+        res.send(403).send('Unauthorized');
+    }
+}
+
 module.exports = function bindApiRoutes(app) {
     apiRouter.use('/member',logger.memberLogger, memberRoutes);
     apiRouter.use('/admin', adminRoutes);
     apiRouter.use('/settings',logger.settingsLogger,logger.memberLogger,settingRoutes);
 
-    app.use('/api',apiRouter);
+    app.use('/api',isAuth,apiRouter);
 }
