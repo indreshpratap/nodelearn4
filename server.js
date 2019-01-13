@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
@@ -7,12 +8,13 @@ const FileStore = require('session-file-store')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const bindApiRoutes = require('./modules/api.routes');
+const mongoConfig = require('./mongo');
 // create instance of express app
 let app = express();
-
+mongoConfig.init();
 app.use(session({
     store: new FileStore({}),
-    secret: 'mysecret',
+    secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
