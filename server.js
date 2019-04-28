@@ -66,14 +66,13 @@ passport.use(new LocalStrategy(function (username, password, done) {
         done(null, { id: 1, name: 'Admin', role: 'admin' }); // authenticated
     } else if (username === 'admin' && password !== 'admin') {
         done(null, null, { message: "Invalid username or password!" });  // not authenticated
-    } else {
-        done(null, null, { message: "Invalid username or password!" });
-    }
-
-    if (username === 'user' && password === 'user') {
+    } else if (username === 'user' && password === 'user') {
         done(null, { id: 2, name: 'User 1', role: 'user' }); // authenticated
     } else if (username === 'user' && password !== 'user') {
         done(null, null, { message: "Invalid username or password!" });  // not authenticated
+    }
+    else {
+        done(null, null, { message: "Invalid username or password!" });
     }
 }));
 
@@ -146,6 +145,6 @@ app.use(function (err, req, res, next) {
 })
 
 // listen to specific port
-server.listen(3000, () => {
-    console.log('Express server running at 3000');
+server.listen(4010, () => {
+    console.log('Express server running at 4010');
 });
